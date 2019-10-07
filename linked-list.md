@@ -1,6 +1,7 @@
 # Linked list
 
 + [Reverse Linked List](#reverse-linked-list)
++ [Intersection of Two Linked Lists](#intersection-of-two-linked-lists)
 
 ## Reverse Linked List
 
@@ -21,4 +22,14 @@ ListNode *current = head, *previous = NULL, *next;
 		return previous;
 	}
 }
+```
+
+## Intersection of Two Linked Lists
+
+https://leetcode.com/problems/intersection-of-two-linked-lists/
+
+```cpp
+ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        
+    }
 ```
