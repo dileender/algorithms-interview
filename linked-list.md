@@ -2,6 +2,7 @@
 
 + [Reverse Linked List](#reverse-linked-list)
 + [Intersection of Two Linked Lists](#intersection-of-two-linked-lists)
++ [Middle of the Linked List](#middle-of-the-linked-list)
 
 ## Reverse Linked List
 
@@ -53,4 +54,21 @@ ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
         }
         return headA;
         }
+```
+
+## Middle of the Linked List
+
+https://leetcode.com/problems/middle-of-the-linked-list/
+
+```cpp
+ ListNode* middleNode(ListNode* head) {
+        if (head == NULL || head->next == NULL)
+            return NULL;
+        ListNode *slow = head, *fast = head;
+        while (fast != NULL && fast->next != NULL) {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        return slow;  
+    }
 ```
