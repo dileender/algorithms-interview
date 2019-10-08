@@ -3,6 +3,7 @@
 + [Reverse Linked List](#reverse-linked-list)
 + [Intersection of Two Linked Lists](#intersection-of-two-linked-lists)
 + [Middle of the Linked List](#middle-of-the-linked-list)
++ [Remove Nth Node From End of List](#remove-nth-node-from-end-of-list)
 
 ## Reverse Linked List
 
@@ -70,5 +71,29 @@ https://leetcode.com/problems/middle-of-the-linked-list/
             fast = fast->next->next;
         }
         return slow;  
+    }
+```
+
+## Remove Nth Node From End of List
+
+https://leetcode.com/problems/remove-nth-node-from-end-of-list/
+
+```cpp
+ListNode* removeNthFromEnd(ListNode* head, int n) {
+        if (head == NULL || n == 0)
+            return head;
+    ListNode *s = new ListNode(0);
+    s->next = head;
+    ListNode *first = s;
+    ListNode *second = s;
+    for (int i = 1; i <= n + 1; i++) {
+        first = first->next;
+    }
+    while (first != NULL) {
+        first = first->next;
+        second = second->next;
+    }
+    second->next = second->next->next;
+    return head;
     }
 ```
