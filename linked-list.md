@@ -4,6 +4,7 @@
 + [Intersection of Two Linked Lists](#intersection-of-two-linked-lists)
 + [Middle of the Linked List](#middle-of-the-linked-list)
 + [Remove Nth Node From End of List](#remove-nth-node-from-end-of-list)
++ [Palindrome Linked List](#palindrome-linked-list)
 
 ## Reverse Linked List
 
@@ -97,3 +98,50 @@ ListNode* removeNthFromEnd(ListNode* head, int n) {
     return head;
     }
 ```
+
+## Palindrome Linked List
+
+https://leetcode.com/problems/palindrome-linked-list/
+
+```cpp
+public:
+    bool isPalindrome(ListNode* head) {
+         if (head == NULL || head->next == NULL )
+            return true;
+        
+        ListNode *head2 = middleNode(head);
+        head2 = reverseList(head);
+        return isEqual(head, head2);
+    }
+    
+public:  ListNode* middleNode(ListNode* head) {
+        if (head == NULL || head->next == NULL)
+            return NULL;
+        ListNode *slow = head, *fast = head;
+        while (fast != NULL && fast->next != NULL) {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        return slow;  
+    }
+    
+public: ListNode* reverseList(ListNode* head) {
+ListNode *current = head, *previous = NULL, *next;
+                while(current != NULL){
+			next = current->next;
+			current->next = previous;
+			previous = current;
+			current = next;
+		}
+		return previous;
+	}
+    
+public: bool isEqual(ListNode* head, ListNode* head2) {
+        while (head != NULL && head2 != NULL) {
+            if (head->val != head2->val)
+                return false;
+            head = head->next;
+            head2 = head2->next; 
+        }
+      return true;
+    }
