@@ -6,7 +6,7 @@
 + [Remove Nth Node From End of List](#remove-nth-node-from-end-of-list)
 + [Palindrome Linked List](#palindrome-linked-list)
 + [Linked List Cycle](#linked-list-cycle)
-+ [](#)
++ [Linked List Cycle II](#linked-list-cycle-ii)
 
 ## Reverse Linked List
 
@@ -170,5 +170,34 @@ https://leetcode.com/problems/linked-list-cycle/
             return true;
         }
     }
+    }
+```
+
+## Linked List Cycle II
+
+https://leetcode.com/problems/linked-list-cycle-ii/
+
+```cpp
+ ListNode *detectCycle(ListNode *head) {
+      if (head == NULL || head->next == NULL) 
+        return NULL;
+    
+    ListNode *slow = head;
+    ListNode *fast = head;
+    while (true) {
+        if (fast == NULL || fast->next == NULL) {
+            return NULL;
+        }
+        slow = slow->next;
+        fast = fast->next->next;
+        if (slow == fast) {
+            slow = head;
+            while (slow != fast) {
+                slow = slow->next;
+                fast = fast->next;
+            }
+            return slow;
+        }
+    }  
     }
 ```
