@@ -5,6 +5,8 @@
 + [Middle of the Linked List](#middle-of-the-linked-list)
 + [Remove Nth Node From End of List](#remove-nth-node-from-end-of-list)
 + [Palindrome Linked List](#palindrome-linked-list)
++ [Linked List Cycle](#linked-list-cycle)
++ [](#)
 
 ## Reverse Linked List
 
@@ -145,3 +147,28 @@ public: bool isEqual(ListNode* head, ListNode* head2) {
         }
       return true;
     }
+```
+
+## Linked List Cycle
+
+https://leetcode.com/problems/linked-list-cycle/
+
+```cpp
+ bool hasCycle(ListNode *head) {
+        if (head == NULL || head->next == NULL) 
+        return false;
+    
+    ListNode *slow = head;
+    ListNode *fast = head;
+    while (true) {
+        if (fast == NULL || fast->next == NULL) {
+            return false;
+        }
+        slow = slow->next;
+        fast = fast->next->next;
+        if (slow == fast) {
+            return true;
+        }
+    }
+    }
+```
