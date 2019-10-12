@@ -8,6 +8,7 @@
 + [Linked List Cycle](#linked-list-cycle)
 + [Linked List Cycle II](#linked-list-cycle-ii)
 + [Merge Two Sorted Lists](#merge-two-sorted-lists)
++ [Sort List](#sort-list)
 
 ## Reverse Linked List
 
@@ -237,6 +238,66 @@ https://leetcode.com/problems/merge-two-sorted-lists/
         current->next = l2;
 
     return sortedList->next;
+        
+    }
+```
+
+## Sort List
+
+https://leetcode.com/problems/sort-list/
+
+```cpp
+ ListNode* sortList(ListNode* head) {
+        if (head == NULL || head->next == NULL)
+            return head;
+
+    ListNode *slow = head, *fast = head, *previous = head;
+
+    while (fast != NULL && fast->next != NULL) {
+        previous = slow;
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    if (fast != NULL) {
+        previous = slow;
+        slow = slow->next;
+    }
+    previous->next = NULL;
+
+    return mergeLists(sortList(head), sortList(slow));
+}
+
+public:
+     ListNode* mergeLists(ListNode* l1, ListNode* l2) {
+         if (l1 == NULL && l2 == NULL)
+             return NULL;
+         if (l1 == NULL) 
+             return l2;
+         if (l2 == NULL) 
+             return l1;
+
+    ListNode *head = new ListNode(0);
+    ListNode *current = head;
+
+    while (l1 != NULL && l2 != NULL) {
+        if (l1->val < l2->val) {
+            current->next = l1;
+            l1 = l1->next;
+        } else {
+            current->next = l2;
+            l2 = l2->next;
+        }
+        current->next->next = NULL;
+        current = current->next;
+    }
+
+    if (l1 != NULL) 
+        current->next = l1;
+    if (l2 != NULL) 
+        current->next = l2;
+
+    return head->next;
         
     }
 ```
