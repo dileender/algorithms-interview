@@ -7,6 +7,7 @@
 + [Palindrome Linked List](#palindrome-linked-list)
 + [Linked List Cycle](#linked-list-cycle)
 + [Linked List Cycle II](#linked-list-cycle-ii)
++ [Merge Two Sorted Lists](#merge-two-sorted-lists)
 
 ## Reverse Linked List
 
@@ -199,5 +200,43 @@ https://leetcode.com/problems/linked-list-cycle-ii/
             return slow;
         }
     }  
+    }
+```
+
+## Merge Two Sorted Lists
+
+https://leetcode.com/problems/merge-two-sorted-lists/
+
+```cpp
+   ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+         if (l1 == NULL && l2 == NULL)
+             return NULL;
+         if (l1 == NULL) 
+             return l2;
+         if (l2 == NULL) 
+             return l1;
+
+    ListNode *sortedList = new ListNode(0);
+    ListNode *current = sortedList;
+
+    while (l1 != NULL && l2 != NULL) {
+        if (l1->val < l2->val) {
+            current->next = l1;
+            l1 = l1->next;
+        } else {
+            current->next = l2;
+            l2 = l2->next;
+        }
+        current->next->next = NULL;
+        current = current->next;
+    }
+
+    if (l1 != NULL) 
+        current->next = l1;
+    if (l2 != NULL) 
+        current->next = l2;
+
+    return sortedList->next;
+        
     }
 ```
