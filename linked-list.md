@@ -9,6 +9,7 @@
 + [Linked List Cycle II](#linked-list-cycle-ii)
 + [Merge Two Sorted Lists](#merge-two-sorted-lists)
 + [Sort List](#sort-list)
++ [Reorder List](#reorder-list)
 
 ## Reverse Linked List
 
@@ -28,7 +29,6 @@ ListNode *current = head, *previous = NULL, *next;
 		
 		return previous;
 	}
-}
 ```
 
 ## Intersection of Two Linked Lists
@@ -300,4 +300,58 @@ public:
     return head->next;
         
     }
+```
+
+## Reorder List
+
+https://leetcode.com/problems/reorder-list/
+
+```cpp
+ void reorderList(ListNode* head) {
+    if (head == NULL || head->next == NULL || head->next->next == NULL) {
+        return;
+    }
+    ListNode *slow = head, *fast = head;
+
+    while (fast != NULL && fast->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    fast = slow;
+    if (fast != NULL) {
+        fast = slow->next;
+        slow->next = NULL;
+    }
+    fast = reverseList(fast);        
+    head = mergeLists(head, fast);
+}
+public:
+    ListNode* reverseList(ListNode* head) {
+    ListNode *current = head, *previous = NULL, *next;
+    
+		      while(current != NULL) {
+			next = current->next;
+			current->next = previous;
+			previous = current;
+			current = next;
+		}
+		return previous;
+	}
+public:
+    ListNode *mergeLists(ListNode* l1, ListNode* l2) {
+    ListNode *currentl1 = l1, *nextl1;
+    ListNode *currentl2 = l2, *nextl2;
+
+    while (currentl1 != NULL && currentl2 != NULL) {
+        nextl1 = currentl1->next;
+        nextl2 = currentl2->next;
+
+        currentl1->next = currentl2;
+        currentl2->next = nextl1;
+
+        currentl1 = nextl1;
+        currentl2 = nextl2;
+    }
+    return l1;
+}
 ```
