@@ -11,6 +11,7 @@
 + [Sort List](#sort-list)
 + [Reorder List](#reorder-list)
 + [Two Sum](#two-sum)
++ [Implement Stack using Queues](#implement-stack-using-queues)
 
 ## Reverse Linked List
 
@@ -373,5 +374,46 @@ https://leetcode.com/problems/two-sum/
           hash_table.insert(pair<int, int>(nums[i], i));
          }
      return vector<int>();    
+    }
+```
+
+## Implement Stack using Queues
+
+https://leetcode.com/problems/implement-stack-using-queues/
+
+```cpp
+     int n;
+    queue<int>q1;
+    /** Initialize your data structure here. */
+    MyStack() {
+        n = 0;
+    }
+    
+    /** Push element x onto stack. */
+    void push(int x) {
+        q1.push(x);
+        n++;
+        for (int i = 0; i< q1.size()-1; i++) {
+            q1.push(q1.front());
+            q1.pop();
+        }
+    }
+    
+    /** Removes the element on top of the stack and returns that element. */
+    int pop() {
+        n--;
+        int a = q1.front();
+        q1.pop();
+        return a;
+    }
+    
+    /** Get the top element. */
+    int top() {
+        return q1.front();
+    }
+    
+    /** Returns whether the stack is empty. */
+    bool empty() {
+        return (n==0);
     }
 ```
