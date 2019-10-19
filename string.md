@@ -1,4 +1,5 @@
 + [Valid Palindrome](#valid-palindrome)
++ [Valid Parentheses](#valid-parentheses)
 
 ## Valid Palindrome
 
@@ -15,4 +16,27 @@ bool isPalindrome(string s) {
             
         } return true;
     }
+```
+
+## Valid Parentheses
+
+https://leetcode.com/problems/valid-parentheses/
+
+```cpp
+ bool isValid(string s) {
+        unordered_map<char, char> parentheses = {{'(',')'},{'[',']'},{'{','}'}};
+        stack<char> st;
+        for (char c : s){
+            if (parentheses.find(c) != parentheses.end()){
+                st.push(parentheses[c]);
+            }
+            else{
+                if(st.empty() || c != st.top()){
+                    return false;
+                }
+                st.pop();
+            }
+        }
+        return st.empty();
+    } 
 ```
