@@ -6,20 +6,33 @@
 https://leetcode.com/problems/valid-palindrome/
 
 ```cpp
-bool isPalindrome(string s) {
-        int i = 0;
-        int j = s.length() - 1;
-        while (i < j) {
-            if(!isAlphaNumeric(s[i])) {
+private: bool isAlphaNumeric(char c) {
+    return (c >= 'a' && c <= 'z') ||
+            (c >= 'A' && c <= 'Z') ||
+            (c >= '0' && c <= '9');
+}
+
+private:int toLower(char c) {
+    return c >= 'A' && c <= 'Z' ? c + ('a' - 'A') : c;
+}
+
+public:bool isPalindrome(string s) {
+    int i = 0;
+    int j = s.length() - 1;
+    while (i < j) {
+        if (!isAlphaNumeric(s[i])) {
+            i++;}
+        else if (!isAlphaNumeric(s[j])){
+            j--;}
+        else if (toLower(s[i]) != toLower(s[j])) {
+            return false;}
+        else {
             i++;
-            }
-            else if(!isAlphaNumeric(s[j])) {
             j--;
-            }
-            else if(tolower(s[i++]) != tolower(s[j--])) return false;
-            
-        } return true;
+        }
     }
+    return true;
+}
 ```
 
 ## Valid Parentheses
