@@ -1,5 +1,6 @@
 + [Valid Palindrome](#valid-palindrome)
 + [Valid Parentheses](#valid-parentheses)
++ [Group Anagrams](#group-anagrams)
 
 ## Valid Palindrome
 
@@ -56,4 +57,31 @@ https://leetcode.com/problems/valid-parentheses/
         }
         return st.empty();
     } 
+```
+
+## Group Anagrams
+
+https://leetcode.com/problems/group-anagrams/
+
+```cpp
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        vector<vector<string>> res;
+        unordered_map<string, vector<string>> s;
+        
+        for(string word : strs)
+        {
+            string main = word;
+            sort(main.begin(), main.end());
+            s[main].push_back(word);
+        }
+        
+        for(const auto i : s)
+        {
+            vector<string> temp;
+            for(string j : i.second)
+                temp.push_back(j);
+            res.push_back(temp);
+        }
+        return res;  
+    }
 ```
