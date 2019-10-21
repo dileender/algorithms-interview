@@ -68,15 +68,13 @@ https://leetcode.com/problems/group-anagrams/
         vector<vector<string>> res;
         unordered_map<string, vector<string>> s;
         
-        for(string word : strs)
-        {
+        for(string word : strs) {
             string main = word;
             sort(main.begin(), main.end());
             s[main].push_back(word);
         }
         
-        for(const auto i : s)
-        {
+        for(const auto i : s) {
             vector<string> temp;
             for(string j : i.second)
                 temp.push_back(j);
