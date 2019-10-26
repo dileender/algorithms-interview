@@ -1,6 +1,7 @@
 + [Valid Palindrome](#valid-palindrome)
 + [Valid Parentheses](#valid-parentheses)
 + [Group Anagrams](#group-anagrams)
++ [Palindromic Substrings](#palindromic-substrings)
 
 ## Valid Palindrome
 
@@ -81,5 +82,31 @@ https://leetcode.com/problems/group-anagrams/
             res.push_back(temp);
         }
         return res;  
+    }
+```
+
+## Palindromic Substrings
+
+https://leetcode.com/problems/palindromic-substrings/
+
+```cpp
+public:
+    int countSubstrings(string s) {
+        int n = s.size();
+        int res = 0;
+        for(int i = 0; i < n; i++) {
+            palindromic(s, i, i, res); 
+            palindromic(s, i, i+1, res);
+        }
+        return res;
+    }
+    
+private:
+    void palindromic(string s, int left, int right, int& res) {
+        while(left >= 0 && right < s.size() && s[left] == s[right]) {
+            res++;
+            left--;
+            right++;
+        }
     }
 ```
