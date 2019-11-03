@@ -2,6 +2,7 @@
 + [Valid Parentheses](#valid-parentheses)
 + [Group Anagrams](#group-anagrams)
 + [Palindromic Substrings](#palindromic-substrings)
++ [Reverse String](#reverse-string)
 
 ## Valid Palindrome
 
@@ -107,6 +108,24 @@ private:
             res++;
             left--;
             right++;
+        }
+    }
+```
+
+## Reverse String
+
+https://leetcode.com/problems/reverse-string/
+
+```cpp
+ void reverseString(vector<char>& s) {
+       int i = 0; 
+        int j = s.size() - 1;
+        while(i < j) {
+            char tmp = s[i];
+            s[i] = s[j];
+            s[j] = tmp;
+            i++;
+            j--;
         }
     }
 ```
