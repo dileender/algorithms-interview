@@ -16,18 +16,17 @@
 https://leetcode.com/problems/reverse-linked-list/
 
 ```cpp
-ListNode* reverseList(ListNode* head)
-{
-    ListNode *current = head, *previous = NULL, *next;
+ListNode* reverseList(ListNode* head) {
+  ListNode *current = head, *previous = NULL, *next;
 
-    while (current != NULL) {
-        next = current->next;
-        current->next = previous;
-        previous = current;
-        current = next;
-    }
+  while (current != NULL) {
+    next = current->next;
+    current->next = previous;
+    previous = current;
+    current = next;
+  }
 
-    return previous;
+  return previous;
 }
 ```
 
@@ -36,30 +35,29 @@ ListNode* reverseList(ListNode* head)
 https://leetcode.com/problems/intersection-of-two-linked-lists/
 
 ```cpp
-ListNode* getIntersectionNode(ListNode* headA, ListNode* headB)
-{
-    ListNode *a = headA, *b = headB;
-    while (a != NULL && b != NULL) {
-        a = a->next;
-        b = b->next;
+ListNode* getIntersectionNode(ListNode* headA, ListNode* headB) {
+  ListNode *a = headA, *b = headB;
+  while (a != NULL && b != NULL) {
+    a = a->next;
+    b = b->next;
+  }
+  if (a == NULL) {
+    while (b != NULL) {
+      headB = headB->next;
+      b = b->next;
     }
-    if (a == NULL) {
-        while (b != NULL) {
-            headB = headB->next;
-            b = b->next;
-        }
+  }
+  if (b == NULL) {
+    while (a != NULL) {
+      headA = headA->next;
+      a = a->next;
     }
-    if (b == NULL) {
-        while (a != NULL) {
-            headA = headA->next;
-            a = a->next;
-        }
-    }
-    while (headA != headB) {
-        headA = headA->next;
-        headB = headB->next;
-    }
-    return headA;
+  }
+  while (headA != headB) {
+    headA = headA->next;
+    headB = headB->next;
+  }
+  return headA;
 }
 ```
 
@@ -68,16 +66,14 @@ ListNode* getIntersectionNode(ListNode* headA, ListNode* headB)
 https://leetcode.com/problems/middle-of-the-linked-list/
 
 ```cpp
-ListNode* middleNode(ListNode* head)
-{
-    if (head == NULL || head->next == NULL)
-        return NULL;
-    ListNode *slow = head, *fast = head;
-    while (fast != NULL && fast->next != NULL) {
-        slow = slow->next;
-        fast = fast->next->next;
-    }
-    return slow;
+ListNode* middleNode(ListNode* head) {
+  if (head == NULL || head->next == NULL) return NULL;
+  ListNode *slow = head, *fast = head;
+  while (fast != NULL && fast->next != NULL) {
+    slow = slow->next;
+    fast = fast->next->next;
+  }
+  return slow;
 }
 ```
 
@@ -86,23 +82,21 @@ ListNode* middleNode(ListNode* head)
 https://leetcode.com/problems/remove-nth-node-from-end-of-list/
 
 ```cpp
-ListNode* removeNthFromEnd(ListNode* head, int n)
-{
-    if (head == NULL || n == 0)
-        return head;
-    ListNode* s = new ListNode(0);
-    s->next = head;
-    ListNode* first = s;
-    ListNode* second = s;
-    for (int i = 1; i <= n + 1; i++) {
-        first = first->next;
-    }
-    while (first != NULL) {
-        first = first->next;
-        second = second->next;
-    }
-    second->next = second->next->next;
-    return head;
+ListNode* removeNthFromEnd(ListNode* head, int n) {
+  if (head == NULL || n == 0) return head;
+  ListNode* s = new ListNode(0);
+  s->next = head;
+  ListNode* first = s;
+  ListNode* second = s;
+  for (int i = 1; i <= n + 1; i++) {
+    first = first->next;
+  }
+  while (first != NULL) {
+    first = first->next;
+    second = second->next;
+  }
+  second->next = second->next->next;
+  return head;
 }
 ```
 
@@ -111,49 +105,42 @@ ListNode* removeNthFromEnd(ListNode* head, int n)
 https://leetcode.com/problems/palindrome-linked-list/
 
 ```cpp
-bool isPalindrome(ListNode* head)
-{
-    if (head == NULL || head->next == NULL)
-        return true;
+bool isPalindrome(ListNode* head) {
+  if (head == NULL || head->next == NULL) return true;
 
-    ListNode* head2 = middleNode(head);
-    head2 = reverseList(head);
-    return isEqual(head, head2);
+  ListNode* head2 = middleNode(head);
+  head2 = reverseList(head);
+  return isEqual(head, head2);
 }
 
-ListNode* middleNode(ListNode* head)
-{
-    if (head == NULL || head->next == NULL)
-        return NULL;
-    ListNode *slow = head, *fast = head;
-    while (fast != NULL && fast->next != NULL) {
-        slow = slow->next;
-        fast = fast->next->next;
-    }
-    return slow;
+ListNode* middleNode(ListNode* head) {
+  if (head == NULL || head->next == NULL) return NULL;
+  ListNode *slow = head, *fast = head;
+  while (fast != NULL && fast->next != NULL) {
+    slow = slow->next;
+    fast = fast->next->next;
+  }
+  return slow;
 }
 
-ListNode* reverseList(ListNode* head)
-{
-    ListNode *current = head, *previous = NULL, *next;
-    while (current != NULL) {
-        next = current->next;
-        current->next = previous;
-        previous = current;
-        current = next;
-    }
-    return previous;
+ListNode* reverseList(ListNode* head) {
+  ListNode *current = head, *previous = NULL, *next;
+  while (current != NULL) {
+    next = current->next;
+    current->next = previous;
+    previous = current;
+    current = next;
+  }
+  return previous;
 }
 
-bool isEqual(ListNode* head, ListNode* head2)
-{
-    while (head != NULL && head2 != NULL) {
-        if (head->val != head2->val)
-            return false;
-        head = head->next;
-        head2 = head2->next;
-    }
-    return true;
+bool isEqual(ListNode* head, ListNode* head2) {
+  while (head != NULL && head2 != NULL) {
+    if (head->val != head2->val) return false;
+    head = head->next;
+    head2 = head2->next;
+  }
+  return true;
 }
 ```
 
@@ -162,23 +149,21 @@ bool isEqual(ListNode* head, ListNode* head2)
 https://leetcode.com/problems/linked-list-cycle/
 
 ```cpp
-bool hasCycle(ListNode* head)
-{
-    if (head == NULL || head->next == NULL)
-        return false;
+bool hasCycle(ListNode* head) {
+  if (head == NULL || head->next == NULL) return false;
 
-    ListNode* slow = head;
-    ListNode* fast = head;
-    while (true) {
-        if (fast == NULL || fast->next == NULL) {
-            return false;
-        }
-        slow = slow->next;
-        fast = fast->next->next;
-        if (slow == fast) {
-            return true;
-        }
+  ListNode* slow = head;
+  ListNode* fast = head;
+  while (true) {
+    if (fast == NULL || fast->next == NULL) {
+      return false;
     }
+    slow = slow->next;
+    fast = fast->next->next;
+    if (slow == fast) {
+      return true;
+    }
+  }
 }
 ```
 
@@ -187,28 +172,26 @@ bool hasCycle(ListNode* head)
 https://leetcode.com/problems/linked-list-cycle-ii/
 
 ```cpp
-ListNode* detectCycle(ListNode* head)
-{
-    if (head == NULL || head->next == NULL)
-        return NULL;
+ListNode* detectCycle(ListNode* head) {
+  if (head == NULL || head->next == NULL) return NULL;
 
-    ListNode* slow = head;
-    ListNode* fast = head;
-    while (true) {
-        if (fast == NULL || fast->next == NULL) {
-            return NULL;
-        }
-        slow = slow->next;
-        fast = fast->next->next;
-        if (slow == fast) {
-            slow = head;
-            while (slow != fast) {
-                slow = slow->next;
-                fast = fast->next;
-            }
-            return slow;
-        }
+  ListNode* slow = head;
+  ListNode* fast = head;
+  while (true) {
+    if (fast == NULL || fast->next == NULL) {
+      return NULL;
     }
+    slow = slow->next;
+    fast = fast->next->next;
+    if (slow == fast) {
+      slow = head;
+      while (slow != fast) {
+        slow = slow->next;
+        fast = fast->next;
+      }
+      return slow;
+    }
+  }
 }
 ```
 
@@ -217,37 +200,30 @@ ListNode* detectCycle(ListNode* head)
 https://leetcode.com/problems/merge-two-sorted-lists/
 
 ```cpp
-ListNode* mergeTwoLists(ListNode* l1, ListNode* l2)
-{
-    if (l1 == NULL && l2 == NULL)
-        return NULL;
-    if (l1 == NULL)
-        return l2;
-    if (l2 == NULL)
-        return l1;
+ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+  if (l1 == NULL && l2 == NULL) return NULL;
+  if (l1 == NULL) return l2;
+  if (l2 == NULL) return l1;
 
-    ListNode* sortedList = new ListNode(0);
-    ListNode* current = sortedList;
+  ListNode* sortedList = new ListNode(0);
+  ListNode* current = sortedList;
 
-    while (l1 != NULL && l2 != NULL) {
-        if (l1->val < l2->val) {
-            current->next = l1;
-            l1 = l1->next;
-        }
-        else {
-            current->next = l2;
-            l2 = l2->next;
-        }
-        current->next->next = NULL;
-        current = current->next;
+  while (l1 != NULL && l2 != NULL) {
+    if (l1->val < l2->val) {
+      current->next = l1;
+      l1 = l1->next;
+    } else {
+      current->next = l2;
+      l2 = l2->next;
     }
+    current->next->next = NULL;
+    current = current->next;
+  }
 
-    if (l1 != NULL)
-        current->next = l1;
-    if (l2 != NULL)
-        current->next = l2;
+  if (l1 != NULL) current->next = l1;
+  if (l2 != NULL) current->next = l2;
 
-    return sortedList->next;
+  return sortedList->next;
 }
 ```
 
@@ -256,58 +232,49 @@ ListNode* mergeTwoLists(ListNode* l1, ListNode* l2)
 https://leetcode.com/problems/sort-list/
 
 ```cpp
-ListNode* sortList(ListNode* head)
-{
-    if (head == NULL || head->next == NULL)
-        return head;
+ListNode* sortList(ListNode* head) {
+  if (head == NULL || head->next == NULL) return head;
 
-    ListNode *slow = head, *fast = head, *previous = head;
+  ListNode *slow = head, *fast = head, *previous = head;
 
-    while (fast != NULL && fast->next != NULL) {
-        previous = slow;
-        slow = slow->next;
-        fast = fast->next->next;
-    }
+  while (fast != NULL && fast->next != NULL) {
+    previous = slow;
+    slow = slow->next;
+    fast = fast->next->next;
+  }
 
-    if (fast != NULL) {
-        previous = slow;
-        slow = slow->next;
-    }
-    previous->next = NULL;
+  if (fast != NULL) {
+    previous = slow;
+    slow = slow->next;
+  }
+  previous->next = NULL;
 
-    return mergeLists(sortList(head), sortList(slow));
+  return mergeLists(sortList(head), sortList(slow));
 }
-ListNode* mergeLists(ListNode* l1, ListNode* l2)
-{
-    if (l1 == NULL && l2 == NULL)
-        return NULL;
-    if (l1 == NULL)
-        return l2;
-    if (l2 == NULL)
-        return l1;
+ListNode* mergeLists(ListNode* l1, ListNode* l2) {
+  if (l1 == NULL && l2 == NULL) return NULL;
+  if (l1 == NULL) return l2;
+  if (l2 == NULL) return l1;
 
-    ListNode* head = new ListNode(0);
-    ListNode* current = head;
+  ListNode* head = new ListNode(0);
+  ListNode* current = head;
 
-    while (l1 != NULL && l2 != NULL) {
-        if (l1->val < l2->val) {
-            current->next = l1;
-            l1 = l1->next;
-        }
-        else {
-            current->next = l2;
-            l2 = l2->next;
-        }
-        current->next->next = NULL;
-        current = current->next;
+  while (l1 != NULL && l2 != NULL) {
+    if (l1->val < l2->val) {
+      current->next = l1;
+      l1 = l1->next;
+    } else {
+      current->next = l2;
+      l2 = l2->next;
     }
+    current->next->next = NULL;
+    current = current->next;
+  }
 
-    if (l1 != NULL)
-        current->next = l1;
-    if (l2 != NULL)
-        current->next = l2;
+  if (l1 != NULL) current->next = l1;
+  if (l2 != NULL) current->next = l2;
 
-    return head->next;
+  return head->next;
 }
 ```
 
@@ -316,53 +283,50 @@ ListNode* mergeLists(ListNode* l1, ListNode* l2)
 https://leetcode.com/problems/reorder-list/
 
 ```cpp
-void reorderList(ListNode* head)
-{
-    if (head == NULL || head->next == NULL || head->next->next == NULL) {
-        return;
-    }
-    ListNode *slow = head, *fast = head;
+void reorderList(ListNode* head) {
+  if (head == NULL || head->next == NULL || head->next->next == NULL) {
+    return;
+  }
+  ListNode *slow = head, *fast = head;
 
-    while (fast != NULL && fast->next != NULL) {
-        slow = slow->next;
-        fast = fast->next->next;
-    }
-    fast = slow;
-    if (fast != NULL) {
-        fast = slow->next;
-        slow->next = NULL;
-    }
-    fast = reverseList(fast);
-    head = mergeLists(head, fast);
+  while (fast != NULL && fast->next != NULL) {
+    slow = slow->next;
+    fast = fast->next->next;
+  }
+  fast = slow;
+  if (fast != NULL) {
+    fast = slow->next;
+    slow->next = NULL;
+  }
+  fast = reverseList(fast);
+  head = mergeLists(head, fast);
 }
 
-ListNode* reverseList(ListNode* head)
-{
-    ListNode *current = head, *previous = NULL, *next;
+ListNode* reverseList(ListNode* head) {
+  ListNode *current = head, *previous = NULL, *next;
 
-    while (current != NULL) {
-        next = current->next;
-        current->next = previous;
-        previous = current;
-        current = next;
-    }
-    return previous;
+  while (current != NULL) {
+    next = current->next;
+    current->next = previous;
+    previous = current;
+    current = next;
+  }
+  return previous;
 }
-ListNode* mergeLists(ListNode* l1, ListNode* l2)
-{
-    ListNode *currentl1 = l1, *nextl1;
-    ListNode *currentl2 = l2, *nextl2;
+ListNode* mergeLists(ListNode* l1, ListNode* l2) {
+  ListNode *currentl1 = l1, *nextl1;
+  ListNode *currentl2 = l2, *nextl2;
 
-    while (currentl1 != NULL && currentl2 != NULL) {
-        nextl1 = currentl1->next;
-        nextl2 = currentl2->next;
+  while (currentl1 != NULL && currentl2 != NULL) {
+    nextl1 = currentl1->next;
+    nextl2 = currentl2->next;
 
-        currentl1->next = currentl2;
-        currentl2->next = nextl1;
+    currentl1->next = currentl2;
+    currentl2->next = nextl1;
 
-        currentl1 = nextl1;
-        currentl2 = nextl2;
-    }
-    return l1;
+    currentl1 = nextl1;
+    currentl2 = nextl2;
+  }
+  return l1;
 }
 ```
