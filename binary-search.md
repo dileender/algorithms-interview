@@ -1,6 +1,7 @@
 + [Binary Search](#binary-search)
 + [Search in Rotated Sorted Array](#search-in-rotated-sorted-array)
 + [Find Minimum in Rotated Sorted Array](#find-minimum-in-rotated-sorted-array)
++ [Find K Closest Elements](#find-k-closest-elements)
 
 ## Binary Search
 
@@ -14,8 +15,9 @@ int search(vector<int>& nums, int target) {
 
   while (low <= high) {
     int middle = low + (high - low) / 2;
-    if (nums[middle] == target)
+    if (nums[middle] == target) {
       return middle;
+      }
     else if (nums[middle] < target) {
       low = middle + 1;
     } else {
@@ -35,7 +37,9 @@ int search(vector<int>& nums, int target) {
   int left = 0, right = nums.size() - 1;
   while (left <= right) {
     int middle = (right - left) / 2 + left;
-    if (nums[middle] == target) return middle;
+    if (nums[middle] == target) { 
+       return middle;
+       }
     if (nums[middle] < nums[right]) {
       if (nums[middle] < target && target <= nums[right]) {
         left = middle + 1;
@@ -70,5 +74,24 @@ int findMin(vector<int>& nums) {
     }
   }
   return nums[left];
+}
+```
+
+## Find K Closest Elements
+
+https://leetcode.com/problems/find-k-closest-elements/
+
+```cpp
+vector<int> findClosestElements(vector<int>& arr, int k, int x) {
+  int left = 0, right = arr.size() - k;
+  while (left < right) {
+    int mid = (left + right) / 2;
+    if ((x - arr[mid]) > (arr[mid + k] - x)) {
+      left = mid + 1;
+    } else {
+      right = mid;
+    }
+  }
+  return vector<int>(arr.begin() + left, arr.begin() + left + k);
 }
 ```
