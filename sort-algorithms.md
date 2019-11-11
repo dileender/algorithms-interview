@@ -44,7 +44,7 @@ vector<int> sortArray(vector<int>& nums) {
 
 void mergeSort(vector<int>& A, vector<int>& temp, int left, int right) {
   if (left >= right) return;
-  int middle = (left + right) / 2;
+  int middle = left + (right - left) / 2;
   mergeSort(A, temp, left, middle);
   mergeSort(A, temp, middle + 1, right);
   merge(A, temp, left, middle, right);
