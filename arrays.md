@@ -1,5 +1,6 @@
 + [Two Sum](#two-sum)
 + [3Sum](#3sum)
++ [3Sum Closest](#3sum-closest)
 
 ## Two Sum
 
@@ -50,5 +51,35 @@ vector<vector<int> > threeSum(vector<int>& nums) {
     }
   }
   return total;
+}
+```
+
+## 3Sum Closest
+
+https://leetcode.com/problems/3sum-closest/
+
+```cpp
+int threeSumClosest(vector<int>& nums, int target) {
+  if (nums.size() < 3) return 0;
+  int closest = nums[0] + nums[1] + nums[2];
+  sort(nums.begin(), nums.end());
+  for (int i = 0; i < nums.size() - 2; i++) {
+    if (i > 0 && nums[i == nums[i - 1]]) continue;
+    int j = i + 1;
+    int k = nums.size() - 1;
+    while (j < k) {
+      int curSum = nums[i] + nums[j] + nums[k];
+      if (curSum == target) return curSum;
+      if (abs(target - curSum) < abs(target - closest)) {
+        closest = curSum;
+      }
+      if (curSum > target) {
+        k--;
+      } else {
+        j++;
+      }
+    }
+  }
+  return closest;
 }
 ```
