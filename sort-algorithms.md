@@ -55,14 +55,16 @@ void merge(vector<int>& A, vector<int>& temp, int left, int middle, int right) {
   while (p1 <= middle && p2 <= right) {
     if (A[p1] <= A[p2]) {
       temp[p_temp++] = A[p1++];
-      }
-    else{
-      temp[p_temp++] = A[p2++];}
+    } else {
+      temp[p_temp++] = A[p2++];
+    }
   }
   while (p1 < middle + 1) {
-  temp[p_temp++] = A[p1++];}
-  while (p2 < r + 1){
-  temp[p_temp++] = A[p2++];}
+    temp[p_temp++] = A[p1++];
+  }
+  while (p2 < r + 1) {
+    temp[p_temp++] = A[p2++];
+  }
   for (int i = 0; i < right - left + 1; i++) {
     A[left + i] = temp[i];
   }
