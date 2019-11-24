@@ -1,7 +1,8 @@
 + [Path Sum](#path-sum)
 + [Path Sum II](#path-sum-ii)
 + [Maximum Depth of Binary Tree](#maximum-depth-of-binary-tree)
-+ [Maximum Depth of N-ary Tree](maximum-depth-of-n-ary-tree)
++ [Maximum Depth of N-ary Tree](#maximum-depth-of-n-ary-tree)
++ [Binary Tree Inorder Traversal](#binary-tree-inorder-traversal)
 
 ## Path Sum
 
@@ -104,5 +105,29 @@ int maxDepth(Node* root) {
   }
 
   return depth;
+}
+```
+
+## Binary Tree Inorder Traversal
+
+https://leetcode.com/problems/binary-tree-inorder-traversal/
+
+```cpp
+vector<int> inorderTraversal(TreeNode* root) {
+  vector<int> res;
+  inorder(root, res);
+  return res;
+}
+void inorder(TreeNode* root, vector<int>& res) {
+  if (!root) {
+    return;
+  }
+  if (root->left != NULL) {
+    inorder(root->left, res);
+  }
+  res.push_back(root->val);
+  if (root->right != NULL) {
+    inorder(root->right, res);
+  }
 }
 ```
