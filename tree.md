@@ -1,6 +1,7 @@
 + [Path Sum](#path-sum)
 + [Path Sum II](#path-sum-ii)
 + [Maximum Depth of Binary Tree](#maximum-depth-of-binary-tree)
++ [Maximum Depth of N-ary Tree](maximum-depth-of-n-ary-tree)
 
 ## Path Sum
 
@@ -70,5 +71,38 @@ int maxDepth(TreeNode* root) {
   }
 
   return res;
+}
+```
+
+## Maximum Depth of N-ary Tree
+
+https://leetcode.com/problems/maximum-depth-of-n-ary-tree/
+
+```cpp
+int maxDepth(Node* root) {
+  int depth = 0;
+
+  if (root == nullptr) {
+    return 0;
+  }
+
+  queue<Node*> q;
+  q.push(root);
+
+  while (!q.empty()) {
+    int siz = q.size();
+    while (siz--) {
+      Node* n = q.front();
+      q.pop();
+
+      for (int i = 0; i < (n->children.size()); i++) {
+        q.push(n->children[i]);
+      }
+    }
+
+    depth++;
+  }
+
+  return depth;
 }
 ```
