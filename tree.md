@@ -3,6 +3,7 @@
 + [Maximum Depth of Binary Tree](#maximum-depth-of-binary-tree)
 + [Maximum Depth of N-ary Tree](#maximum-depth-of-n-ary-tree)
 + [Binary Tree Inorder Traversal](#binary-tree-inorder-traversal)
++ [Binary Tree Level Order Traversal](#binary-tree-level-order-traversal)
 
 ## Path Sum
 
@@ -129,5 +130,33 @@ void inorder(TreeNode* root, vector<int>& res) {
   if (root->right != NULL) {
     inorder(root->right, res);
   }
+}
+```
+
+## Binary Tree Level Order Traversal
+
+https://leetcode.com/problems/binary-tree-level-order-traversal/
+
+```cpp
+vector<vector<int>> levelOrder(TreeNode* root) {
+  vector<vector<int>> res;
+  if (!root) {
+    return res;
+  }
+  queue<TreeNode*> q;
+  q.push(root);
+  while (!q.empty()) {
+    vector<int> r;
+    int n = q.size();
+    for (int i = 0; i < n; ++i) {
+      auto current = q.front();
+      q.pop();
+      r.push_back(current->val);
+      if (current->left) q.push(current->left);
+      if (current->right) q.push(current->right);
+    }
+    res.push_back(r);
+  }
+  return res;
 }
 ```
