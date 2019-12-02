@@ -4,6 +4,8 @@
 + [Maximum Depth of N-ary Tree](#maximum-depth-of-n-ary-tree)
 + [Binary Tree Inorder Traversal](#binary-tree-inorder-traversal)
 + [Binary Tree Level Order Traversal](#binary-tree-level-order-traversal)
++ [Symmetric Tree](#symmetric-tree)
++ [Same Tree](#same-tree)
 
 ## Path Sum
 
@@ -159,4 +161,20 @@ vector<vector<int>> levelOrder(TreeNode* root) {
   }
   return res;
 }
+```
+
+## Symmetric Tree
+
+https://leetcode.com/problems/symmetric-tree/
+
+```cpp
+
+```
+
+## Same Tree
+
+https://leetcode.com/problems/same-tree/
+
+```cpp
+
 ```
