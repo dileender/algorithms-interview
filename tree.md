@@ -7,6 +7,7 @@
 + [Symmetric Tree](#symmetric-tree)
 + [Same Tree](#same-tree)
 + [Invert Binary Tree](#invert-binary-tree)
++ [Subtree of Another Tree](#subtree-of-another-tree)
 
 ## Path Sum
 
@@ -221,5 +222,37 @@ TreeNode* invertTree(TreeNode* root) {
     root->left = left;
   }
   return root;
+}
+```
+
+## Subtree of Another Tree
+
+https://leetcode.com/problems/subtree-of-another-tree/
+
+```cpp
+bool isSubtree(TreeNode* s, TreeNode* t) {
+  if (s == NULL && t == NULL) {
+    return true;
+  }
+  if (t == NULL) {
+    return true;
+  } else if (s == NULL) {
+    return false;
+  }
+
+  return (isSameTree(s, t) || isSubtree(s->left, t) || isSubtree(s->right, t));
+}
+bool isSameTree(TreeNode* s, TreeNode* t) {
+  if (s == NULL && t == NULL) {
+    return true;
+  }
+  if (s == NULL || t == NULL) {
+    return false;
+  }
+  if (s->val != t->val) {
+    return false;
+  }
+
+  return (isSameTree(s->left, t->left) && isSameTree(s->right, t->right));
 }
 ```
