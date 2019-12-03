@@ -6,6 +6,7 @@
 + [Binary Tree Level Order Traversal](#binary-tree-level-order-traversal)
 + [Symmetric Tree](#symmetric-tree)
 + [Same Tree](#same-tree)
++ [Invert Binary Tree](#invert-binary-tree)
 
 ## Path Sum
 
@@ -205,5 +206,20 @@ bool isSameTree(TreeNode* p, TreeNode* q) {
   }
 
   return (isSameTree(p->left, q->left) && isSameTree(p->right, q->right));
+}
+```
+
+## Invert Binary Tree
+
+https://leetcode.com/problems/invert-binary-tree/
+
+```cpp
+TreeNode* invertTree(TreeNode* root) {
+  if (root != NULL) {
+    TreeNode* left = invertTree(root->right);
+    root->right = invertTree(root->left);
+    root->left = left;
+  }
+  return root;
 }
 ```
