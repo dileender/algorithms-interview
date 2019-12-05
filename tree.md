@@ -8,6 +8,10 @@
 + [Same Tree](#same-tree)
 + [Invert Binary Tree](#invert-binary-tree)
 + [Subtree of Another Tree](#subtree-of-another-tree)
++ [Kth Smallest Element in a BST](#kth-smallest-element-in-a-bst)
++ [Validate Binary Search Tree](#validate-binary-search-tree)
++ [Lowest Common Ancestor of a Binary Tree](#lowest-common-ancestor-of-a-binary-tree)
++ [Binary Search Tree Iterator](#binary-search-tree-iterator)
 
 ## Path Sum
 
@@ -254,5 +258,104 @@ bool isSameTree(TreeNode* s, TreeNode* t) {
   }
 
   return (isSameTree(s->left, t->left) && isSameTree(s->right, t->right));
+}
+```
+
+## Kth Smallest Element in a BST
+
+https://leetcode.com/problems/kth-smallest-element-in-a-bst/
+
+```cpp
+int kthSmallest(TreeNode* root, int k) { 
+  return Smallest(root, k); 
+}
+int Smallest(TreeNode* root, int& k) {
+  if (root == NULL) {
+    return 0;
+  }
+  int res = Smallest(root->left, k);
+  if (k == 0) {
+    return res;
+  }
+  if (--k == 0) {
+    return root->val;
+  }
+  return Smallest(root->right, k);
+}
+```
+
+## Validate Binary Search Tree
+
+https://leetcode.com/problems/validate-binary-search-tree/
+
+```cpp
+bool isValidBST(TreeNode* root) {
+  return Validate(root, LONG_MIN, LONG_MAX);
+}
+bool Validate(TreeNode* root, long min, long max) {
+  if (root == NULL) {
+    return true;
+  }
+  if ((root->val <= min) || (root->val >= max)) {
+    return false;
+  }
+  return Validate(root->left, min, root->val) &&
+         Validate(root->right, root->val, max);
+}
+```
+
+## Lowest Common Ancestor of a Binary Tree
+
+https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/
+
+```cpp
+TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+  if (root == NULL || root == p || root == q) return root;
+  TreeNode* left = lowestCommonAncestor(root->left, p, q);
+  TreeNode* right = lowestCommonAncestor(root->right, p, q);
+  if (left == NULL) {
+    return right;
+  } else {
+    if (right == NULL) {
+      return left;
+    } else {
+      return root;
+    }
+  }
+}
+```
+
+## Binary Search Tree Iterator
+
+https://leetcode.com/problems/binary-search-tree-iterator/
+
+```cpp
+stack<TreeNode*> st;
+BSTIterator(TreeNode* root) {
+  find_left(root); 
+}
+
+/** @return whether we have a next smallest number */
+bool hasNext() {
+  return !st.empty(); 
+}
+
+/** @return the next smallest number */
+int next() {
+  TreeNode* top = st.top();
+  st.pop();
+  if (top->right != NULL) {
+  find_left(top->right);
+  }
+  return top->val;
+}
+
+/** put all the left child() of root */
+void find_left(TreeNode* root) {
+  TreeNode* p = root;
+  while (p != NULL) {
+    st.push(p);
+    p = p->left;
+  }
 }
 ```
