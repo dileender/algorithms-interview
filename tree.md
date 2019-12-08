@@ -12,6 +12,7 @@
 + [Validate Binary Search Tree](#validate-binary-search-tree)
 + [Lowest Common Ancestor of a Binary Tree](#lowest-common-ancestor-of-a-binary-tree)
 + [Binary Search Tree Iterator](#binary-search-tree-iterator)
++ [Lowest Common Ancestor of a Binary Search Tree](#lowest-common-ancestor-of-a-binary-search-tree)
 
 ## Path Sum
 
@@ -357,5 +358,21 @@ void find_left(TreeNode* root) {
     st.push(p);
     p = p->left;
   }
+}
+```
+
+## Lowest Common Ancestor of a Binary Search Tree
+
+https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/
+
+```cpp
+TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+  if ((root->val > p->val) && (root->val > q->val)) {
+    return lowestCommonAncestor(root->left, p, q);
+  }
+  if ((root->val < p->val) && (root->val < q->val)) {
+    return lowestCommonAncestor(root->right, p, q);
+  }
+  return root;
 }
 ```
